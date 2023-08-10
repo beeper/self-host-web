@@ -1,15 +1,31 @@
-import Link from "next/link";
+"use client"
+
+import BeeperLogin from "@/app/components/BeeperLogin"
+import {useState} from "react";
+import FlyLogin from "@/app/components/FlyLogin";
 
 export default function Home() {
 
-    function sendLoginEmail(event: any) {
-        event.preventDefault()
-        console.log(event.target[0].value)
+    const [token, setToken] = useState("");
+    const [flyToken, setFlyToken] = useState("");
+
+    if (!token) {
+        return (
+            <div>
+                <BeeperLogin setToken={setToken} />
+                <p>token:</p>
+                <p>{token}</p>
+            </div>
+        )
+    }
+
+    if (!flyToken) {
+        return (
+            <FlyLogin setFlyToken={setFlyToken} />
+        )
     }
 
     return (
-        <div>
-            <Link href={"beeper/email"}>Log in</Link>
-        </div>
+        <p>hi</p>
     )
 }
