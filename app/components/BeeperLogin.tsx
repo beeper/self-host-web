@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-export default function BeeperLogin({ setBeeperToken }) {
+export default function BeeperLogin({ setBeeperToken }: any) {
 
     const [sentCode, setSentCode] = useState(false)
     const [loginIdentifier, setLoginIdentifier] = useState("")
