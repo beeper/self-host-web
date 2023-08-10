@@ -3,18 +3,17 @@
 import BeeperLogin from "@/app/components/BeeperLogin"
 import {useState} from "react";
 import FlyLogin from "@/app/components/FlyLogin";
+import Deployment from "@/app/components/Deployment";
 
 export default function Home() {
 
-    const [token, setToken] = useState("");
+    const [beeperToken, setBeeperToken] = useState("");
     const [flyToken, setFlyToken] = useState("");
 
-    if (!token) {
+    if (!beeperToken) {
         return (
             <div>
-                <BeeperLogin setToken={setToken} />
-                <p>token:</p>
-                <p>{token}</p>
+                <BeeperLogin setBeeperToken={setBeeperToken} />
             </div>
         )
     }
@@ -26,6 +25,6 @@ export default function Home() {
     }
 
     return (
-        <p>hi</p>
+        <Deployment beeperToken={beeperToken} flyToken={flyToken} />
     )
 }

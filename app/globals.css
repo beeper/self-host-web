@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input {
+    border: 1px solid black;
+}
+
+button {
+    border: 1px solid black;
+}
+
+a {
+    text-decoration: underline;
+}
