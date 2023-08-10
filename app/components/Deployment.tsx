@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-export default function Deployment({ beeperToken, flyToken}) {
+export default function Deployment({ beeperToken, flyToken}: any) {
 
     const [deployed, setDeployed] = useState(false)
     const [deployInProgress, setDeployInProgress] = useState(false)

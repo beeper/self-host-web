@@ -1,4 +1,4 @@
-export default function FlyLogin({setFlyToken}) {
+export default function FlyLogin({setFlyToken}: any) {
 
     function handleSubmit(event: any) {
         event.preventDefault();
