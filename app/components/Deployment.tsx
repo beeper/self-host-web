@@ -5,6 +5,7 @@ export default function Deployment({ beeperToken, flyToken}: any) {
     const [deployed, setDeployed] = useState(false)
     const [deployInProgress, setDeployInProgress] = useState(false)
     const [appId, setAppId] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
 
     async function deploy(event: any) {
         event.preventDefault()
@@ -17,7 +18,14 @@ export default function Deployment({ beeperToken, flyToken}: any) {
             body: JSON.stringify({ beeperToken: beeperToken, flyToken: flyToken, bridge: bridge})
         })
 
+        if (res.status === 500) {
+            const error_data = await res.json();
+            setErrorMessage(error_data.error);
+            return;
+        }
+
         const { appName } = await res.json();
+
         setAppId(appName);
         setDeployed(true)
         setDeployInProgress(false)
@@ -48,6 +56,8 @@ export default function Deployment({ beeperToken, flyToken}: any) {
                     <p>{`In Beeper, send a message to @${appId}bot:beeper.local`}</p>
                 </>
             }
+
+            { errorMessage }
         </>
     )
 }
