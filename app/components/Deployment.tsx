@@ -42,6 +42,10 @@ export default function Deployment({ beeperToken, flyToken}: any) {
                                 <input type={"radio"} name={"bridge"} value={"whatsapp"} defaultChecked />
                                 <label>WhatsApp</label>
                             </div>
+                            <div>
+                                <input type={"radio"} name={"bridge"} value={"gmessages"} />
+                                <label>Google Messages</label>
+                            </div>
                             <button type={"submit"}>Deploy</button>
                         </fieldset>
                     </form>
