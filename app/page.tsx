@@ -1,9 +1,9 @@
 "use client"
 
 import BeeperLogin from "@/app/components/BeeperLogin"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import FlyLogin from "@/app/components/FlyLogin";
-import Deployment from "@/app/components/Deployment";
+import Console from "@/app/components/Console";
 import Welcome from "@/app/components/Welcome";
 
 export default function Home() {
@@ -11,6 +11,24 @@ export default function Home() {
     const [beeperToken, setBeeperToken] = useState("");
     const [flyToken, setFlyToken] = useState("");
     const [seenWelcome, setSeenWelcome] = useState(false);
+
+    useEffect(() => {
+
+        const beeperTokenLocalStorage = window.localStorage.getItem("beeperToken")
+        if (beeperTokenLocalStorage) {
+            setBeeperToken(beeperTokenLocalStorage);
+        }
+
+        const flyTokenLocalStorage = window.localStorage.getItem("flyToken")
+        if (flyTokenLocalStorage) {
+            setFlyToken(flyTokenLocalStorage);
+        }
+
+        const seenWelcomeLocalStorage = window.localStorage.getItem("seenWelcome")
+        if (seenWelcomeLocalStorage === "true") {
+            setSeenWelcome(true);
+        }
+    }, [])
 
     if (!seenWelcome) {
         return (
@@ -33,6 +51,6 @@ export default function Home() {
     }
 
     return (
-        <Deployment beeperToken={beeperToken} flyToken={flyToken} />
+        <Console beeperToken={beeperToken} flyToken={flyToken} />
     )
 }

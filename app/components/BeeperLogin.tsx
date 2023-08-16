@@ -67,26 +67,29 @@ export default function BeeperLogin({ setBeeperToken }: any) {
         const { access_token } = await accessTokenResponse.json();
 
         setBeeperToken(access_token);
+        window.localStorage.setItem("beeperToken", access_token)
     }
 
     return (
-        <>
+        <div className={"m-20"}>
+            <p className={"text-center text-4xl font-bold"}>Sign in to Beeper</p>
+            <p className={"text-center mt-5"}>This will be used to connect your self-hosted bridge to your Beeper account. Your credentials will be passed directly to Fly.</p>
             { sentCode ? (
-                <div>
-                    <p>We sent you a login code.</p>
-                    <form onSubmit={getToken}>
-                        <p>Enter your code:</p>
-                        <input name="code" type="number" />
+                <div className={"mx-auto w-72 mt-16"}>
+                    <p>{"We've emailed you a login code."}</p>
+                    <form className={"mt-2"} onSubmit={getToken}>
+                        <p>Enter it here:</p>
+                        <input className={"p-2 border-2 rounded-md w-full"} name="code" type="number" />
                     </form>
                 </div>
                 ) : (
-                <div>
+                <div className={"mx-auto w-72 mt-16"}>
                     <form onSubmit={sendLoginEmail}>
                         <p>Email:</p>
-                        <input name="email" type="email" />
+                        <input className={"p-2 border-2 rounded-md w-full"} name="email" type="email" />
                     </form>
                 </div>
             )}
-        </>
+        </div>
     )
 }

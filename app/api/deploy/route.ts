@@ -6,8 +6,6 @@ export async function POST(req: Request) {
     const {beeperToken, flyToken, bridge} = await req.json()
     const app_name = `sh-${bridge}-${Date.now()}`
 
-    console.log("Received request")
-
     // Create the app
 
     const res_create_app = await fetch('https://api.machines.dev/v1/apps', {
@@ -23,7 +21,6 @@ export async function POST(req: Request) {
         const create_app_data = await res_create_app.json();
         return NextResponse.json({ error: JSON.stringify(create_app_data) }, { status: 500 })
     }
-    console.log("Successfully created app")
 
     // Allocate shared IPv4
 
@@ -55,8 +52,6 @@ export async function POST(req: Request) {
     if (!ip_request_data.allocateIpAddress?.app?.sharedIpAddress) {
         return NextResponse.json({ error: JSON.stringify(ip_request_data) }, { status: 500 })
     }
-
-    console.log("Allocated IP")
 
     // Set secrets
 
@@ -94,8 +89,6 @@ export async function POST(req: Request) {
     if (!secrets_request_data?.setSecrets?.hasOwnProperty('release')) {
         return NextResponse.json({ error: JSON.stringify(secrets_request_data) }, { status: 500 })
     }
-
-    console.log("Created secrets")
 
     // Create machine
 
@@ -151,7 +144,6 @@ export async function POST(req: Request) {
         const create_machine_data = await res_create_machine.json()
         return NextResponse.json({ error: JSON.stringify(create_machine_data) }, { status: 500 })
     }
-    console.log("Created machine")
 
     return NextResponse.json({"appName": app_name})
 }
