@@ -15,7 +15,7 @@ export default function Welcome({ setSeenWelcome }: any) {
                 height={100}
                 className={"mx-auto"}
             />
-            <p className={"text-center text-4xl font-bold mt-5"}>Easy self-hosted bridges.</p>
+            <p className={"text-center text-4xl font-bold mt-5"}>Easily self-host bridges.</p>
 
             <div className={"px-20"}>
                 <p className={"mt-10"}>Use this web app to self-host bridges on your <a href={"https://fly.io/"}>fly.io</a> account. Simply sign into Beeper and Fly, and this web app will run the bridge on your Fly account and install it in Beeper.</p>
