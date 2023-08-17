@@ -23,6 +23,7 @@ export default function Console({ beeperToken, flyToken }: any) {
                 <tbody>
                     <Bridge name={"WhatsApp"} value={"whatsapp"} beeperToken={beeperToken} flyToken={flyToken}/>
                     <Bridge name={"Google Messages"} value={"gmessages"} beeperToken={beeperToken} flyToken={flyToken}/>
+                    <Bridge name={"Discord"} value={"discord"} beeperToken={beeperToken} flyToken={flyToken}/>
                 </tbody>
             </table>
             <div className={"text-center"}>
