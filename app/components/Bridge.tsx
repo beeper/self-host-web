@@ -39,7 +39,7 @@ export default function Bridge({name, value, beeperToken, flyToken}: any) {
                     <button className={"p-2 rounded-md m-4 bg-purple-300 border-0 text-white"} disabled={true}>Deploying...</button>}
             </td>
             <td className={"border p-2"}>
-                { deployed && <a href={`https://fly.io/apps/${appId}/monitoring`}>Machine</a> }
+                { deployed && <a target="_blank" href={`https://fly.io/apps/${appId}/monitoring`} rel="noopener noreferrer">Machine</a> }
                 { errorMessage }
             </td>
 
