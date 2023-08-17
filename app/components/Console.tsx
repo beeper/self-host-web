@@ -1,6 +1,12 @@
 import Bridge from "./Bridge"
 
 export default function Console({ beeperToken, flyToken }: any) {
+
+    function signOut() {
+        window.localStorage.clear()
+        location.reload();
+    }
+
     return (
         <div className={"m-20"}>
             <p className={"max-w-3xl mx-auto"}>Press {"\"Deploy\""} to deploy a bridge. Then, in Beeper Desktop, send a message to the bridge bot. You may need to wait a minute for the bridge to initialize before being able to message the bot.</p>
@@ -18,6 +24,9 @@ export default function Console({ beeperToken, flyToken }: any) {
                     <Bridge name={"Google Messages"} value={"gmessages"} beeperToken={beeperToken} flyToken={flyToken}/>
                 </tbody>
             </table>
+            <div className={"text-center"}>
+                <button className={"p-2 rounded-md absolute bottom-10 border-2 hover:bg-gray-50"} onClick={signOut}>Sign Out</button>
+            </div>
         </div>
     )
 }
