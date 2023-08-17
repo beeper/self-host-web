@@ -10,6 +10,7 @@ export default function Console({ beeperToken, flyToken }: any) {
     return (
         <div className={"m-20"}>
             <p className={"max-w-3xl mx-auto"}>Press {"\"Deploy\""} to deploy a bridge. Then, in Beeper Desktop, send a message to the bridge bot. You may need to wait a minute for the bridge to initialize before being able to message the bot.</p>
+            <p className={"max-w-3xl mx-auto mt-4"}>To experiment with bridges, check out <a target="_blank" href={"https://github.com/beeper/bridge-manager"} rel="noopener noreferrer">https://github.com/beeper/bridge-manager</a>. {"You'll"} also need it to remove bridges from your Beeper account, in addition to deleting the app on Fly.</p>
             <table className={"table-auto mx-auto mt-10"}>
                 <thead>
                     <tr>
