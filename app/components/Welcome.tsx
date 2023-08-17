@@ -4,8 +4,8 @@ export default function Welcome({ setSeenWelcome }: any) {
 
     function acceptWelcome() {
         setSeenWelcome(true);
-        window.localStorage.setItem("seenWelcome", "true")
     }
+
     return (
         <div className={"m-20"}>
             <Image

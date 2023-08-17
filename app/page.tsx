@@ -23,11 +23,6 @@ export default function Home() {
         if (flyTokenLocalStorage) {
             setFlyToken(flyTokenLocalStorage);
         }
-
-        const seenWelcomeLocalStorage = window.localStorage.getItem("seenWelcome")
-        if (seenWelcomeLocalStorage === "true") {
-            setSeenWelcome(true);
-        }
     }, [])
 
     if (!seenWelcome) {
