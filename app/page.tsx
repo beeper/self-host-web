@@ -25,7 +25,7 @@ export default function Home() {
         }
     }, [])
 
-    if (!seenWelcome) {
+    if (!seenWelcome && !flyToken) {
         return (
             <Welcome setSeenWelcome={setSeenWelcome} />
         )

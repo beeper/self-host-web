@@ -79,7 +79,8 @@ export async function POST(req: Request) {
             "appId": app_name,
             "secrets": [
                 {"key": "MATRIX_ACCESS_TOKEN", "value": beeperToken},
-                {"key": "BRIDGE_NAME", "value": app_name}
+                {"key": "BRIDGE_NAME", "value": app_name},
+                {"key": "DB_DIR", "value": "/data"}
             ]
         }
     }
@@ -101,7 +102,7 @@ export async function POST(req: Request) {
         body: JSON.stringify({
             "region": "iad",
             "config": {
-                "image": "griffinli/bridge-manager",
+                "image": "ghcr.io/beeper/bridge-manager",
                 "env": {
                     "APP_ENV": "production"
                 },
