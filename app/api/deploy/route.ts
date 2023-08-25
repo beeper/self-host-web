@@ -3,7 +3,7 @@ import {gql, GraphQLClient} from 'graphql-request'
 
 export async function POST(req: Request) {
 
-    const {beeperToken, flyToken, bridge} = await req.json()
+    const {beeperToken, flyToken, bridge, region} = await req.json()
     const app_name = `sh-${bridge}-${Date.now()}`
 
     // Create the app
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
         "input": {
             "appId": app_name,
             "type": "shared_v4",
-            "region": "iad"
+            "region": region
         }
     }
     const ip_request_data: any = await graphQLClient.request(ip_query, ip_variables)
@@ -100,7 +100,7 @@ export async function POST(req: Request) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            "region": "iad",
+            "region": region,
             "config": {
                 "image": "ghcr.io/beeper/bridge-manager",
                 "env": {
@@ -126,17 +126,7 @@ export async function POST(req: Request) {
                     "protocol": "tcp",
                     "internal_port": 8080
                     }
-                ],
-                // "checks": {
-                //     "httpget": {
-                //         "type": "http",
-                //         "port": 8080,
-                //         "method": "GET",
-                //         "path": "/",
-                //         "interval": "15s",
-                //         "timeout": "10s"
-                //     }
-                // }
+                ]
             }
         })
     })
@@ -144,6 +134,27 @@ export async function POST(req: Request) {
     if (res_create_machine.status != 200) {
         const create_machine_data = await res_create_machine.json()
         return NextResponse.json({ error: JSON.stringify(create_machine_data) }, { status: 500 })
+    }
+
+    // Wait for the app to deploy before returning
+    let beeper_bridges: string[] = []
+    while (!(beeper_bridges.includes(app_name))) {
+        const beeper_whoami = await fetch('https://api.beeper.com/whoami', {
+            headers: {
+                'Authorization': `Bearer ${beeperToken}`,
+                'Content-Type': 'application/json',
+            },
+        })
+
+        if (beeper_whoami.status != 200) {
+            const beeper_bridge_data = await beeper_whoami.json();
+            return NextResponse.json({ error: JSON.stringify(beeper_bridge_data) }, { status: 500 })
+        }
+
+        const beeper_bridge_response = await beeper_whoami.json();
+        beeper_bridges = Object.keys(beeper_bridge_response.user.bridges);
+
+        await new Promise(r => setTimeout(r, 1000));
     }
 
     return NextResponse.json({"appName": app_name})

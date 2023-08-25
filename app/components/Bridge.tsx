@@ -1,18 +1,16 @@
 import {useState} from "react";
 
-export default function Bridge({name, value, beeperToken, flyToken}: any) {
+export default function Bridge({name, onFly, beeperToken, flyToken, onDelete}: any) {
 
-    const [deployed, setDeployed] = useState(false)
-    const [deployInProgress, setDeployInProgress] = useState(false)
-    const [appId, setAppId] = useState("")
+    const [deleteInProgress, setDeleteInProgress] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
 
-    async function deploy() {
-        setDeployInProgress(true)
+    async function deleteBridge() {
+        setDeleteInProgress(true);
 
-        const res = await fetch("/api/deploy", {
-            method: 'POST',
-            body: JSON.stringify({beeperToken: beeperToken, flyToken: flyToken, bridge: value})
+        const res = await fetch("/api/delete", {
+            method: 'DELETE',
+            body: JSON.stringify({beeperToken: beeperToken, flyToken: flyToken, name: name, onFly: onFly})
         })
 
         if (res.status === 500) {
@@ -21,32 +19,29 @@ export default function Bridge({name, value, beeperToken, flyToken}: any) {
             return;
         }
 
-        const {appName} = await res.json();
-
-        setAppId(appName);
-        setDeployed(true)
-        setDeployInProgress(false)
+        setDeleteInProgress(false);
+        onDelete();
     }
-
 
     return (
         <tr>
             <td className={"border p-2"}>
                 <p className={"p-2"}>{name}</p>
             </td>
-            <td className={"border p-2"}>
-                {!deployInProgress ? <button className={"p-2 rounded-md m-4 bg-purple-600 border-0 text-white hover:bg-purple-500"} onClick={deploy}>Deploy</button> :
-                    <button className={"p-2 rounded-md m-4 bg-purple-300 border-0 text-white"} disabled={true}>Deploying...</button>}
+
+            <td className={"border p-2 text-center"}>
+                { onFly && <button className={"p-2 rounded-md m-4 bg-gray-600 border-0 text-white hover:bg-gray-500"} onClick={() => { navigator.clipboard.writeText(`@${name}bot:beeper.local`)}}>Copy</button>}
             </td>
-            <td className={"border p-2"}>
-                { deployed && <a target="_blank" href={`https://fly.io/apps/${appId}/monitoring`} rel="noopener noreferrer">Machine</a> }
+
+            <td className={"border p-2 text-center"}>
+                { onFly && <a target="_blank" href={`https://fly.io/apps/${name}/monitoring`} rel="noopener noreferrer">View on Fly</a> }
+            </td>
+
+            <td className={"border p-2 text-center"}>
+                {!deleteInProgress ? <button className={"p-2 rounded-md m-4 bg-red-600 border-0 text-white hover:bg-red-500"} onClick={deleteBridge}>Delete</button> :
+                    <button className={"p-2 rounded-md m-4 bg-red-300 border-0 text-white"} disabled={true}>Deleting...</button>}
                 { errorMessage }
             </td>
-
-            <td className={"border p-2"}>
-                { deployed && <p>{`@${appId}bot:beeper.local`}</p> }
-            </td>
-
         </tr>
     )
 }
