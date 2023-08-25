@@ -92,8 +92,8 @@ export default function BridgeDeploy({beeperToken, flyToken, onCreate}: any) {
                     ))}
                 </select>
                 {!deployInProgress ? <button
-                        className={"p-2 rounded-md m-4 bg-purple-600 border-0 text-white hover:bg-purple-500"}>Deploy</button> :
-                    <button className={"p-2 rounded-md m-4 bg-purple-300 border-0 text-white"}
+                        className="p-2 rounded-md m-4 bg-purple-600 border-0 text-white hover:bg-purple-500">Deploy</button> :
+                    <button className="p-2 rounded-md m-4 bg-purple-300 border-0 text-white"
                             disabled={true}>Deploying...</button>}
                 {errorMessage}
             </form>
