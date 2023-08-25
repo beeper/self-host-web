@@ -26,6 +26,11 @@ export async function DELETE(req: Request) {
         },
     })
 
+    if (beeper_delete.status != 204) {
+        const beeper_delete_data = await beeper_delete.json();
+        return NextResponse.json({ error: JSON.stringify(beeper_delete_data) }, { status: 500 })
+    }
+
     // Wait for the app to delete before returning.
     let beeper_bridges: string[] = [name]
     while (beeper_bridges.includes(name)) {
