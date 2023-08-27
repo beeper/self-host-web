@@ -49,7 +49,7 @@ export default function BridgeDeploy({beeperToken, flyToken, onCreate}: any) {
         slack: "Slack",
         telegram: "Telegram",
         twitter: "Twitter",
-        heisenbridge: "Heisenbridge",
+        heisenbridge: "HeisenBridge (IRC)",
         facebook: "Facebook",
         instagram: "Instagram",
         imessage: "iMessage"
