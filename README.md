@@ -6,7 +6,7 @@ A web app that deploys self-hosted bridges to your [fly.io](https://fly.io) acco
 
 Clone the repo:
 ```commandline
-git clone https://github.com/beeper/bridge-deployer.git
+git clone https://github.com/beeper/self-host-web.git
 ```
 
 Install dependencies:
