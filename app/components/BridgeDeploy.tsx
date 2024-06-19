@@ -44,7 +44,9 @@ export default function BridgeDeploy({beeperToken, flyToken, onCreate}: any) {
     const bridges: Record<string, string> = {
         whatsapp: "WhatsApp",
         gmessages: "Google Messages",
-        instagram: "Instagram",
+        instagramgo: "Instagram (New)",
+        facebookgo: "Facebook (New)",
+        signal: "Signal (New)",
         discord: "Discord",
         slack: "Slack",
         telegram: "Telegram",
